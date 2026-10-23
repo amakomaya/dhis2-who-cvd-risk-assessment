@@ -97,4 +97,5 @@ npm run build             # d2-app-scripts build — produces build/index.html, 
 - `docs/datastore-admin-guide.md` — DataStore authorization model, safe initialization/update procedure.
 - `docs/security-and-privacy.md` — security posture, known limitations, release checklist, rollback.
 - `docs/deployment.md` — build and deployment instructions.
+- `docs/user-guide/CVD-Risk-Assessment-User-Guide.pdf` — screenshot-illustrated user guide for clinical staff.
 - `CHANGELOG.md` — what changed and why, most recent first.

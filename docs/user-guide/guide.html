@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CVD Risk Assessment Tool — User Guide</title>
+<style>
+  @page {
+    size: A4;
+    margin: 20mm 18mm;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: #1a1a1a;
+    line-height: 1.55;
+    margin: 0;
+    font-size: 11.5pt;
+  }
+  .cover {
+    min-height: 240mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    page-break-after: always;
+  }
+  .cover .badge {
+    display: inline-block;
+    background: #14274E;
+    color: #fff;
+    font-size: 11pt;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 24px;
+    width: fit-content;
+  }
+  .cover h1 {
+    font-size: 30pt;
+    margin: 0 0 10px;
+    color: #14274E;
+  }
+  .cover .subtitle {
+    font-size: 14pt;
+    color: #444;
+    margin-bottom: 40px;
+  }
+  .cover .meta {
+    font-size: 10.5pt;
+    color: #666;
+    border-top: 1px solid #ddd;
+    padding-top: 16px;
+    margin-top: 40px;
+  }
+  .disclaimer {
+    background: #FFF4E5;
+    border: 1px solid #F0B429;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-top: 30px;
+    font-size: 10.5pt;
+  }
+  .disclaimer strong { color: #8a5a00; }
+
+  h2 {
+    font-size: 17pt;
+    color: #14274E;
+    border-bottom: 2px solid #14274E;
+    padding-bottom: 6px;
+    margin-top: 36px;
+  }
+  h3 {
+    font-size: 13pt;
+    color: #14274E;
+    margin-top: 24px;
+  }
+  .step {
+    display: flex;
+    gap: 14px;
+    margin: 16px 0;
+    page-break-inside: avoid;
+  }
+  .step .num {
+    flex: 0 0 28px;
+    height: 28px;
+    width: 28px;
+    background: #14274E;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 12pt;
+  }
+  .step .body { flex: 1; }
+  .step .body p { margin: 0 0 6px; }
+
+  figure {
+    margin: 14px 0 22px;
+    page-break-inside: avoid;
+  }
+  figure img {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  }
+  figcaption {
+    font-size: 9.5pt;
+    color: #666;
+    margin-top: 6px;
+    text-align: center;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 20px;
+    font-size: 10.5pt;
+  }
+  th, td {
+    border: 1px solid #ddd;
+    padding: 7px 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th { background: #F3F5F9; color: #14274E; }
+
+  .badge-pill {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 9.5pt;
+    font-weight: 600;
+    color: #fff;
+  }
+  .b-green { background: #4CAF50; }
+  .b-yellow { background: #FFC107; color: #1A1A1A; }
+  .b-red { background: #E53935; }
+  .b-gray { background: #9e9e9e; }
+
+  .callout {
+    border-left: 4px solid #14274E;
+    background: #F3F5F9;
+    padding: 10px 14px;
+    margin: 14px 0;
+    font-size: 10.5pt;
+  }
+  .callout.warn {
+    border-left-color: #E53935;
+    background: #FDECEA;
+  }
+  .callout.tip {
+    border-left-color: #4CAF50;
+    background: #EAF7EA;
+  }
+
+  ul, ol { margin: 6px 0; padding-left: 22px; }
+  li { margin-bottom: 4px; }
+
+  .faq dt {
+    font-weight: 700;
+    color: #14274E;
+    margin-top: 14px;
+  }
+  .faq dd {
+    margin: 4px 0 0;
+  }
+
+  footer.page-footer {
+    font-size: 9pt;
+    color: #999;
+    text-align: center;
+    margin-top: 40px;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+  }
+
+  .toc ol { padding-left: 20px; }
+  .toc li { margin-bottom: 8px; font-size: 11.5pt; }
+</style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="cover">
+  <span class="badge">EHMIS Tokha · DHIS2</span>
+  <h1>CVD Risk Assessment Tool</h1>
+  <div class="subtitle">User Guide for Clinical Staff</div>
+  <p style="max-width: 520px; color:#333;">
+    A step-by-step guide to using the automatic 10-year cardiovascular disease (CVD)
+    risk calculator built into the Out Patient Service form in Capture.
+  </p>
+  <div class="disclaimer">
+    <strong>Important:</strong> This tool produces a risk <em>estimate</em>, not a diagnosis.
+    It does not prescribe treatment. Clinical decisions must follow your facility's
+    approved protocols.
+  </div>
+  <div class="meta">
+    Version 0.1.0 &nbsp;·&nbsp; EHMIS Tokha (erecord.hmis.gov.np/tokha) &nbsp;·&nbsp; Program: बहिरङ्ग सेवा (OPD)
+  </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<section class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li>What this tool does</li>
+    <li>Where to find it</li>
+    <li>Step-by-step: getting a risk score</li>
+    <li>Understanding the result table</li>
+    <li>Saving the result</li>
+    <li>What if a value is missing?</li>
+    <li>Frequently asked questions</li>
+  </ol>
+</section>
+
+<!-- 1. WHAT THIS TOOL DOES -->
+<section>
+  <h2>1. What this tool does</h2>
+  <p>
+    When you open an Out Patient Service visit for a patient in Capture, a panel titled
+    <strong>"10 years CVD Risk"</strong> appears on the right-hand side of the screen.
+    It automatically:
+  </p>
+  <ul>
+    <li>Reads the patient's age and sex from their record.</li>
+    <li>Reads smoking status, blood pressure, cholesterol, and diabetes status as you fill them into the visit form.</li>
+    <li>Calculates the patient's 10-year cardiovascular disease risk using the official <strong>WHO 2019 risk chart (South Asia region)</strong>.</li>
+    <li>Displays the result immediately, color-coded, as you type — no extra data entry, no separate form, and no button to click to calculate.</li>
+  </ul>
+  <div class="callout tip">
+    <strong>You don't do anything extra.</strong> Fill in the visit form as you normally would.
+    The risk score appears and updates by itself.
+  </div>
+</section>
+
+<!-- 2. WHERE TO FIND IT -->
+<section>
+  <h2>2. Where to find it</h2>
+  <div class="step">
+    <div class="num">1</div>
+    <div class="body">
+      <p>Open the patient's enrollment in Capture, as usual.</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">2</div>
+    <div class="body">
+      <p>Click <strong>New event</strong> (or open an existing visit you're editing) under <strong>Out Patient Service</strong>.</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">3</div>
+    <div class="body">
+      <p>Look to the right of the form. The <strong>"10 years CVD Risk"</strong> panel is there from the moment the page loads.</p>
+    </div>
+  </div>
+  <figure>
+    <img src="images/01-dashboard.jpg" alt="Enrollment dashboard showing the Out Patient Service visit history and New event button">
+    <figcaption>Figure 1 — The enrollment dashboard. Click "New event" to start a visit.</figcaption>
+  </figure>
+</section>
+
+<!-- 3. STEP BY STEP -->
+<section>
+  <h2>3. Step-by-step: getting a risk score</h2>
+  <p>When a new visit opens, the panel starts empty — every row shows a dash (<span class="badge-pill b-gray">-</span>) because nothing has been entered yet.</p>
+  <figure>
+    <img src="images/02-new-event-empty.png" alt="New event form with the CVD Risk panel showing empty dashes for every factor before any data is entered">
+    <figcaption>Figure 2 — A new visit, before any clinical data has been entered. Every row shows "-".</figcaption>
+  </figure>
+
+  <div class="step">
+    <div class="num">1</div>
+    <div class="body"><p>Enter the visit date as usual.</p></div>
+  </div>
+  <div class="step">
+    <div class="num">2</div>
+    <div class="body">
+      <p>Tick <strong>"मेयर दिर्घायु कार्यक्रम"</strong> (or select the NCD service type) to reveal the clinical fields: smoking, blood pressure, cholesterol, and diabetes.</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">3</div>
+    <div class="body">
+      <p>Fill in each field exactly as you normally would:</p>
+      <ul>
+        <li><strong>Smoking status</strong> (धुम्रपान)</li>
+        <li><strong>Systolic blood pressure</strong> (रक्तचाप)</li>
+        <li><strong>Total cholesterol</strong></li>
+        <li><strong>Diabetes status</strong> (मधुमेह)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">4</div>
+    <div class="body">
+      <p>As each field is filled in, watch the panel on the right — it updates <strong>automatically</strong>, row by row, with no action needed from you.</p>
+    </div>
+  </div>
+
+  <figure>
+    <img src="images/03-calculated-low-risk.png" alt="CVD Risk panel showing a fully calculated low-risk example, with all factors in green and a 2 percent risk score">
+    <figcaption>Figure 3 — Example: all values entered. Every factor is color-coded, and the overall 10-year risk (2%) is shown at the bottom.</figcaption>
+  </figure>
+
+  <div class="callout">
+    The result updates instantly if you go back and change a value — for example, correcting a
+    blood pressure reading immediately recalculates the risk score.
+  </div>
+</section>
+
+<!-- 4. UNDERSTANDING THE TABLE -->
+<section>
+  <h2>4. Understanding the result table</h2>
+  <p>Each row shows one factor, its value, and a color badge showing whether it's in a normal, borderline, or high range:</p>
+  <table>
+    <thead>
+      <tr><th>Badge color</th><th>Meaning</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="badge-pill b-green">Normal</span></td><td>The value is within the normal clinical range.</td></tr>
+      <tr><td><span class="badge-pill b-yellow">Borderline</span></td><td>The value is elevated — worth noting, not yet high-risk on its own.</td></tr>
+      <tr><td><span class="badge-pill b-red">High</span></td><td>The value is outside the normal range and contributes to higher risk.</td></tr>
+      <tr><td><span class="badge-pill b-gray">-</span></td><td>Not entered yet, or could not be found on this visit.</td></tr>
+    </tbody>
+  </table>
+
+  <p>The final row, <strong>Risk Score/Level(%)</strong>, is the overall 10-year cardiovascular risk estimate.
+  Its color follows the official WHO chart's own legend:</p>
+  <table>
+    <thead>
+      <tr><th>Risk band</th><th>Color</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Under 5%</td><td><span class="badge-pill" style="background:#99CC00;color:#1A1A1A;">&lt;5%</span></td></tr>
+      <tr><td>5% to under 10%</td><td><span class="badge-pill" style="background:#FFFF00;color:#1A1A1A;">5–10%</span></td></tr>
+      <tr><td>10% to under 20%</td><td><span class="badge-pill" style="background:#FF9933;color:#1A1A1A;">10–20%</span></td></tr>
+      <tr><td>20% to under 30%</td><td><span class="badge-pill" style="background:#CC0000;">20–30%</span></td></tr>
+      <tr><td>30% or more</td><td><span class="badge-pill" style="background:#990033;">≥30%</span></td></tr>
+    </tbody>
+  </table>
+
+  <p>An example with several factors elevated, showing how the panel looks for a higher-risk patient:</p>
+  <figure>
+    <img src="images/04-calculated-high-risk.png" alt="CVD Risk panel showing a high-risk example, with smoking, blood pressure, cholesterol and diabetes all marked high, and a 20 percent risk score in red">
+    <figcaption>Figure 4 — Example: several factors elevated. The overall risk (20%) is shown in the matching WHO chart color.</figcaption>
+  </figure>
+</section>
+
+<!-- 5. SAVING -->
+<section>
+  <h2>5. Saving the result</h2>
+  <div class="callout tip">
+    <strong>There is nothing extra to save.</strong> The calculated score is written automatically
+    into the visit's own Risk Score field. Simply click your usual
+    <strong>Save</strong>, <strong>Complete</strong>, or <strong>Update</strong> button at the
+    bottom of the form, exactly as you always do.
+  </div>
+  <p>
+    There is no separate "Save risk" button and no separate risk-assessment form —
+    the score travels with the rest of the visit's data.
+  </p>
+</section>
+
+<!-- 6. MISSING VALUES -->
+<section>
+  <h2>6. What if a value is missing?</h2>
+  <p>
+    If a factor hasn't been entered, its row simply shows a dash (<span class="badge-pill b-gray">-</span>).
+    The tool never guesses or fills in a value on its own.
+  </p>
+  <ul>
+    <li>If <strong>total cholesterol</strong> and <strong>diabetes status</strong> are both entered, the official WHO laboratory-based chart is used.</li>
+    <li>If either is missing but <strong>height and weight</strong> have been entered, the tool automatically falls back to the WHO's alternative BMI-based chart instead — this is a documented WHO method, not an approximation.</li>
+    <li>If neither is available, the Risk Score row stays as "-" until enough information is entered.</li>
+  </ul>
+</section>
+
+<!-- 7. FAQ -->
+<section>
+  <h2>7. Frequently asked questions</h2>
+  <dl class="faq">
+    <dt>Do I need to open a separate app?</dt>
+    <dd>No. The panel is built directly into the Out Patient Service visit page in Capture.</dd>
+
+    <dt>Can I edit the risk score myself?</dt>
+    <dd>No. It is calculated automatically and is read-only — this ensures every score is calculated the same, consistent way.</dd>
+
+    <dt>Why does the Age shown change?</dt>
+    <dd>Age is calculated from the patient's date of birth as of the visit date you entered — not always "today's" age. This keeps old, already-completed visits showing the patient's age <em>at that visit</em>.</dd>
+
+    <dt>What if I'm reviewing an old, already-saved visit?</dt>
+    <dd>Open it in <strong>Edit event</strong> mode as usual. The panel reads the saved values and displays the risk exactly as it would for a new visit, and will update live if you change a value.</dd>
+
+    <dt>Is this a diagnosis?</dt>
+    <dd>No. It is a risk estimate based on the WHO 2019 chart. Clinical judgement and your facility's protocols always take priority.</dd>
+  </dl>
+
+  <footer class="page-footer">
+    CVD Risk Assessment Tool — User Guide &nbsp;·&nbsp; EHMIS Tokha &nbsp;·&nbsp; For questions, contact your facility's DHIS2 administrator.
+  </footer>
+</section>
+
+</body>
+</html>
