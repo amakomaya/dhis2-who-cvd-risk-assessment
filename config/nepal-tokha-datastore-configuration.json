@@ -1,0 +1,53 @@
+{
+  "application": {
+    "enabled": false,
+    "configSchemaVersion": "1.0.0",
+    "configVersion": "1.0.0-nepal-tokha-draft"
+  },
+  "dhis2MetadataMappings": {
+    "programId": "RWD4kcdpe0E",
+    "programStageId": "bqd9yievDDw",
+    "inputDataElementIds": {
+      "smokingStatus": "D3eRPeASNXl",
+      "systolicBloodPressure": "vFG3xb1q7XI",
+      "totalCholesterol": "e5vnong2Xos",
+      "diabetesStatus": "H148aekqr5U",
+      "height": "T375sw78yIP",
+      "weight": "OlfMMk0g5xc"
+    },
+    "trackedEntityAttributeIds": {
+      "dateOfBirth": "i607dSgfm4F",
+      "sex": "RzyHxE71iyC"
+    },
+    "outputDataElementIds": {
+      "riskPercent": "KgeoM7TE7HJ"
+    }
+  },
+  "inputSettings": {
+    "sex": {
+      "optionCodeMapping": {
+        "male": "male",
+        "female": "female"
+      }
+    },
+    "smokingStatus": {
+      "optionCodeMapping": {
+        "1": "non-smoker",
+        "2": "smoker",
+        "3": "smoker",
+        "4": "non-smoker"
+      }
+    },
+    "totalCholesterol": {
+      "acceptedUnits": [
+        "mg/dL"
+      ]
+    },
+    "diabetesStatus": {
+      "optionCodeMapping": {
+        "1": "with",
+        "0": "without"
+      }
+    }
+  }
+}

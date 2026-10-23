@@ -1,0 +1,32 @@
+{
+  "application": {
+    "enabled": false,
+    "configSchemaVersion": "1.0.0",
+    "configVersion": "0.1.0-draft"
+  },
+  "dhis2MetadataMappings": {
+    "programId": "",
+    "programStageId": "",
+    "inputDataElementIds": {
+      "smokingStatus": "",
+      "systolicBloodPressure": "",
+      "totalCholesterol": "",
+      "diabetesStatus": "",
+      "height": "",
+      "weight": ""
+    },
+    "trackedEntityAttributeIds": {
+      "dateOfBirth": "",
+      "sex": ""
+    },
+    "outputDataElementIds": {
+      "riskPercent": ""
+    }
+  },
+  "inputSettings": {
+    "sex": { "optionCodeMapping": {} },
+    "smokingStatus": { "optionCodeMapping": {} },
+    "totalCholesterol": { "acceptedUnits": ["mmol/L", "mg/dL"] },
+    "diabetesStatus": { "optionCodeMapping": {} }
+  }
+}
