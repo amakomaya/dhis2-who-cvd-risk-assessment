@@ -1,7 +1,7 @@
 {
   "name": "amakomaya-cvd-risk",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "DHIS2 custom app: WHO 2019 laboratory-based CVD risk assessment",
   "scripts": {
     "start": "d2-app-scripts start",
@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@dhis2/app-runtime": "^3.11.0",
+    "@dhis2/multi-calendar-dates": "^3.2.1",
     "@dhis2/ui": "^9.5.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

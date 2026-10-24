@@ -119,20 +119,42 @@ describe("tryReadNativeFormValues", () => {
     expect(result.raw.systolicBloodPressureMmHg).toBe("130");
   });
 
-  it("reads the event's own date (occurredAt) from its data-test=dataentry-field-occurredAt wrapper", () => {
+  it("reads the event's own date (occurredAt) from its data-test=dataentry-field-occurredAt wrapper and converts it from Nepali (BS) to Gregorian (ISO)", () => {
     // Confirmed via live inspection of the Capture app's DOM (erecord.hmis.gov.np,
     // 2026-10-23): this is a fixed data-test attribute, not keyed by a data
-    // element UID, since the event date isn't a tracked data value.
+    // element UID, since the event date isn't a tracked data value. This
+    // deployment displays the field in the Nepali (Bikram Sambat) calendar,
+    // so the raw DOM value ("2082-07-08" BS) must come back converted to its
+    // Gregorian equivalent ("2025-10-25").
     const doc = document.implementation.createHTMLDocument("test");
     const wrapper = doc.createElement("div");
     wrapper.setAttribute("data-test", "dataentry-field-occurredAt");
     const input = doc.createElement("input");
-    input.value = "2015-05-06";
+    input.value = "2082-07-08";
     wrapper.appendChild(input);
     doc.body.appendChild(wrapper);
     const fakeWindow = { document: doc } as unknown as Window;
     const result = tryReadNativeFormValues(fakeWindow, configFixture());
-    expect(result.occurredAtIso).toBe("2015-05-06");
+    expect(result.occurredAtIso).toBe("2025-10-25");
+  });
+
+  it("leaves a Gregorian-displayed date (standard Capture app) unchanged, not misread as Nepali", () => {
+    // Confirmed via live inspection on 2026-10-24: the standard Capture app
+    // (/apps/capture) displays this field in Gregorian, matching the
+    // instance's "iso8601" system calendar setting - unlike eRecord, which
+    // overrides it to Nepali regardless of that setting. A Gregorian value
+    // here must pass through unconverted, or age math would be corrupted
+    // for Capture-app users.
+    const doc = document.implementation.createHTMLDocument("test");
+    const wrapper = doc.createElement("div");
+    wrapper.setAttribute("data-test", "dataentry-field-occurredAt");
+    const input = doc.createElement("input");
+    input.value = "2026-10-16";
+    wrapper.appendChild(input);
+    doc.body.appendChild(wrapper);
+    const fakeWindow = { document: doc } as unknown as Window;
+    const result = tryReadNativeFormValues(fakeWindow, configFixture());
+    expect(result.occurredAtIso).toBe("2026-10-16");
   });
 
   it("leaves occurredAtIso undefined when the event date hasn't been entered yet", () => {

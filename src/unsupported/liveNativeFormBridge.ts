@@ -23,6 +23,7 @@
 import { mapOptionCode } from "../config/optionSetMappings";
 import type { CvdRiskConfiguration } from "../config/schema";
 import type { CvdRiskRawInput } from "../domain/cvd-risk/types";
+import { resolveLiveOccurredAtToIso } from "../utils/nepaliDate";
 
 export interface NativeFormAccessResult {
   /** True if the Capture app's document was reachable at all (same-origin iframe access succeeded). */
@@ -48,12 +49,24 @@ function readTextField(doc: Document, uid: string): string | undefined {
  * it's the event's own date, not a tracked data value). Age must be
  * computed as of this date, not always "today" - see
  * AssessmentWorkspace.tsx's age-recompute effect.
+ *
+ * This plugin can be embedded in more than one host app on this DHIS2
+ * instance, and they don't agree on the calendar this field is displayed
+ * in: the standard Capture app (/apps/capture) renders it in Gregorian -
+ * matching the instance's "iso8601" system calendar setting - while the
+ * separately maintained eRecord app (/apps/e-record) renders it in the
+ * Nepali (Bikram Sambat) calendar regardless of that system setting. DHIS2
+ * stores and returns occurredAt as Gregorian everywhere else (Tracker API,
+ * the database) either way. See resolveLiveOccurredAtToIso for how the
+ * calendar is inferred from the raw value itself before it's used in age
+ * math.
  */
 function readOccurredAtField(doc: Document): string | undefined {
   const wrapper = doc.querySelector('[data-test="dataentry-field-occurredAt"]');
   const input = wrapper?.querySelector("input") as HTMLInputElement | null;
   const value = input?.value?.trim();
-  return value ? value : undefined;
+  if (!value) return undefined;
+  return resolveLiveOccurredAtToIso(value) ?? undefined;
 }
 
 /** Reads the checked option's value from a native radio group, keyed by the data element UID as the `name` attribute. */
